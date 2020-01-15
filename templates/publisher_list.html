@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>出版社</title>
+</head>
+<body>
+<a href="/add_publisher/">添加出版社</a>
+<table border="1">
+    <thead>
+        <tr>
+            <td>序号</td>
+            <td>ID</td>
+            <td>出版社名称</td>
+            <td>操作</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% for publisher in publisher_list %}
+                <td>{{ forloop.counter }}</td>
+                <td>{{ publisher.id }}</td>
+                <td>{{ publisher.name }}</td>
+                <td>
+                    <a href="/del_publisher/?id={{ publisher.id }}">删除</a>
+                </td>
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
