@@ -27,3 +27,22 @@ def del_publisher(request):
         return redirect('/publisher_list/')
     else:
         return HttpResponse("删除失败")
+
+
+def edit_publisher(request):
+    if request.method == 'POST':
+        # 1.拿到html视图中的id和name
+        ret_id = request.POST.get('id')
+        new_name = request.POST.get('name')
+
+        # 2.查询数据库，再赋新值，再更新数据库
+        id_obj = models.Publisher.objects.get(id=ret_id)
+        id_obj.name = new_name
+        id_obj.save()
+
+        return redirect("/publisher_list/")
+    #
+    # 获取要编辑的出版社
+    # edit_id = request.GET.get('id')
+    # ret = models.Publisher.objects.get(id=edit_id)
+    return render(request, 'edit_publisher.html')

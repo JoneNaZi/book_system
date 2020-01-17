@@ -22,4 +22,5 @@ urlpatterns = [
     re_path('^publisher_list/', views.publisher_list),
     re_path('^add_publisher/', views.add_publisher),
     re_path('^del_publisher/', views.del_publisher),
+    re_path('^edit_publisher/', views.edit_publisher),
 ]

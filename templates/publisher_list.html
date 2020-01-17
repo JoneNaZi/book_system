@@ -13,6 +13,7 @@
             <td>ID</td>
             <td>出版社名称</td>
             <td>操作</td>
+            <td>修改</td>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +24,9 @@
                 <td>{{ publisher.name }}</td>
                 <td>
                     <a href="/del_publisher/?id={{ publisher.id }}">删除</a>
+                </td>
+                <td>
+                    <a href="/edit_publisher/">修改</a>
                 </td>
             {% endfor %}
         </tr>
