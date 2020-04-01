@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>书籍列表</title>
+</head>
+<body>
+<a href="/add_book/">添加书籍</a>
+<table border="1">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>书籍名称</td>
+            <td>出版社名称</td>
+            <td>修改</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% for book in book_list %}
+                <td>{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.publisher.name }}</td>
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

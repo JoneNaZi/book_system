@@ -6,8 +6,8 @@
 </head>
 <body>
     <form action="/edit_publisher/" method="post">
-        <p><input type="text" name="id"></p>
-        <p><input type="text" name="name"></p>
+        <input type="text" name="id" value="{{ edit_id }}" style="display: none">
+        <p>出版社名称：<input type="text" name="name"></p>
         <p><input type="submit"></p>
     </form>
 </body>

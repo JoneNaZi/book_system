@@ -3,11 +3,13 @@ from . import models
 
 
 # Create your views here.
+# 出版社列表
 def publisher_list(request):
     ret = models.Publisher.objects.all()
     return render(request, 'publisher_list.html', {'publisher_list': ret})
 
 
+# 添加出版社
 def add_publisher(request):
     if request.method == 'POST':
         name = request.POST.get('publisher_name')
@@ -16,6 +18,7 @@ def add_publisher(request):
     return render(request, 'add_publisher.html')
 
 
+# 删除出版社
 def del_publisher(request):
     # 1.从get请求的参数里面拿到将要删除的数据的ID值
     del_id = request.GET.get('id', None)
@@ -29,6 +32,7 @@ def del_publisher(request):
         return HttpResponse("删除失败")
 
 
+# 编辑出版社
 def edit_publisher(request):
     if request.method == 'POST':
         # 1.拿到html视图中的id和name
@@ -41,8 +45,24 @@ def edit_publisher(request):
         id_obj.save()
 
         return redirect("/publisher_list/")
-    #
+
     # 获取要编辑的出版社
-    # edit_id = request.GET.get('id')
-    # ret = models.Publisher.objects.get(id=edit_id)
-    return render(request, 'edit_publisher.html')
+    edit_id = request.GET.get('id')
+    return render(request, 'edit_publisher.html', {"edit_id": edit_id})
+
+
+# 书籍列表
+def book_list(request):
+    ret = models.Book.objects.all()
+    return render(request, 'book_list.html', {'book_list': ret})
+
+
+# 添加书籍
+def add_book(request):
+    if request.method == "POST":
+        new_title = request.POST.get("book_title")
+        new_publisher_id = request.POST.get("publisher")
+        models.Book.objects.create(title=new_title, publisher_id=new_publisher_id)
+        return redirect('/book_list/')
+    ret = models.Publisher.objects.all()
+    return render(request, 'add_book.html', {"publisher_list": ret})
