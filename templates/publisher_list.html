@@ -9,27 +9,24 @@
 <table border="1">
     <thead>
         <tr>
-            <td>序号</td>
-            <td>ID</td>
-            <td>出版社名称</td>
-            <td>操作</td>
-            <td>修改</td>
+            <th>序号</th>
+            <th>ID</th>
+            <th>出版社名称</th>
+            <th>操作</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            {% for publisher in publisher_list %}
+        {% for publisher in publisher_list %}
+            <tr>
                 <td>{{ forloop.counter }}</td>
                 <td>{{ publisher.id }}</td>
                 <td>{{ publisher.name }}</td>
                 <td>
                     <a href="/del_publisher/?id={{ publisher.id }}">删除</a>
-                </td>
-                <td>
                     <a href="/edit_publisher/?id={{ publisher.id }}">修改</a>
                 </td>
-            {% endfor %}
-        </tr>
+            </tr>
+        {% endfor %}
     </tbody>
 </table>
 </body>

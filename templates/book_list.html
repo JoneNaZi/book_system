@@ -9,20 +9,24 @@
 <table border="1">
     <thead>
         <tr>
-            <td>ID</td>
-            <td>书籍名称</td>
-            <td>出版社名称</td>
-            <td>修改</td>
+            <th>ID</th>
+            <th>书籍名称</th>
+            <th>出版社名称</th>
+            <th>修改</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            {% for book in book_list %}
+        {% for book in book_list %}
+            <tr>
                 <td>{{ book.id }}</td>
                 <td>{{ book.title }}</td>
                 <td>{{ book.publisher.name }}</td>
-            {% endfor %}
-        </tr>
+                <td>
+                    <a href="/del_book/?id={{ book.id }}">删除</a>
+                    <a href="/edit_book/?id={{ book.id }}">修改</a>
+                </td>
+            </tr>
+        {% endfor %}
     </tbody>
 </table>
 </body>

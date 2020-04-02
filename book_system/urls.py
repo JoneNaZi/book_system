@@ -25,4 +25,6 @@ urlpatterns = [
     re_path('^edit_publisher/', views.edit_publisher),
     re_path('^book_list/', views.book_list),
     re_path('^add_book', views.add_book),
+    re_path('^del_book', views.del_book),
+    re_path('^edit_book', views.edit_book),
 ]
