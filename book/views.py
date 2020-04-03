@@ -6,7 +6,7 @@ from . import models
 # 出版社列表
 def publisher_list(request):
     ret = models.Publisher.objects.all().order_by("id")
-    return render(request, 'publisher_list.html', {'publisher_list': ret})
+    return render(request, 'publisher/publisher_list.html', {'publisher_list': ret})
 
 
 # 添加出版社
@@ -15,7 +15,7 @@ def add_publisher(request):
         name = request.POST.get('publisher_name')
         models.Publisher.objects.create(name=name)
         return redirect('/publisher_list/')
-    return render(request, 'add_publisher.html')
+    return render(request, 'publisher/add_publisher.html')
 
 
 # 删除出版社
@@ -48,13 +48,13 @@ def edit_publisher(request):
 
     # 获取要编辑的出版社
     edit_id = request.GET.get('id')
-    return render(request, 'edit_publisher.html', {"edit_id": edit_id})
+    return render(request, 'publisher/edit_publisher.html', {"edit_id": edit_id})
 
 
 # 书籍列表
 def book_list(request):
     ret = models.Book.objects.all().order_by("id")
-    return render(request, 'book_list.html', {'book_list': ret})
+    return render(request, 'book/book_list.html', {'book_list': ret})
 
 
 # 添加书籍
@@ -65,7 +65,7 @@ def add_book(request):
         models.Book.objects.create(title=new_title, publisher_id=new_publisher_id)
         return redirect('/book_list/')
     ret = models.Publisher.objects.all()
-    return render(request, 'add_book.html', {"publisher_list": ret})
+    return render(request, 'book/add_book.html', {"publisher_list": ret})
 
 
 # 删除书籍
@@ -84,7 +84,6 @@ def edit_book(request):
     if request.method == "POST":
         # 1.拿到html视图中的id和name
         ret_id = request.POST.get("book_id")
-        print(ret_id)
         new_title = request.POST.get("book_title")
         new_publisher_id = request.POST.get("publisher")
 
@@ -97,4 +96,42 @@ def edit_book(request):
 
     edit_id = request.GET.get("id")
     ret = models.Publisher.objects.all()
-    return render(request, 'edit_book.html', {"publisher_list": ret, "edit_id": edit_id})
+    return render(request, 'book/edit_book.html', {"publisher_list": ret, "edit_id": edit_id})
+
+
+# 作者
+def author_list(request):
+    ret = models.Author.objects.all().order_by('id')
+    return render(request, 'author/author_list.html', {"author_list": ret})
+
+
+def add_author(request):
+    if request.method == "POST":
+        new_author = request.POST.get("author_name")
+        models.Author.objects.create(name=new_author)
+        return redirect("/author_list/")
+    ret = models.Author.objects.all()
+    return render(request, 'author/add_author.html', {"author_list": ret})
+
+
+def del_author(request):
+    del_id = request.GET.get('id', None)
+    if del_id:
+        del_obj = models.Author.objects.filter(id=del_id)
+        del_obj.delete()
+        return redirect('/author_list/')
+    else:
+        return HttpResponse("删除失败")
+
+
+def edit_author(request):
+    if request.method == 'POST':
+        ret_id = request.POST.get('author_id')
+        new_name = request.POST.get('author_name')
+
+        ret_obj = models.Author.objects.get(id=ret_id)
+        ret_obj.name = new_name
+        ret_obj.save()
+        return redirect('/author_list/')
+    edit_id = request.GET.get('id')
+    return render(request, 'author/edit_author.html', {"edit_id": edit_id})

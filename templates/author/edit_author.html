@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑作者</title>
+</head>
+<body>
+<form action="/edit_author/" method="post">
+    <input type="text" name="author_id" value="{{ edit_id }}" style="display: none">
+    <p>作者：<input type="text" name="author_name"></p>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>
